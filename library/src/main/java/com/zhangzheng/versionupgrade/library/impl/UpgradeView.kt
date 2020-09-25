@@ -14,7 +14,12 @@ open class UpgradeView : IUpgradeView {
             .setTitle("升级提示")
             .setMessage(message)
 
-        builder.setPositiveButton("升级"){ _, _ -> successListener()}
+        builder.setPositiveButton("升级"){ _, _ ->
+            successListener()
+            if(forceUpdate){
+                showDialog(context,forceUpdate,message)
+            }
+        }
         if (!forceUpdate) {
             builder.setNegativeButton("取消") { dialog, _ -> dialog.dismiss()}
         }
@@ -22,9 +27,8 @@ open class UpgradeView : IUpgradeView {
         val dialog = builder.create()
 
         dialog.setCanceledOnTouchOutside(!forceUpdate)
-
+        dialog.setCancelable(!forceUpdate)
         dialog.setOnDismissListener { failListener() }
-
         dialog.show()
     }
 

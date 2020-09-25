@@ -11,6 +11,6 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        VersionUpgrade().requestUpdate(this)
+        VersionUpgrade(TestUpgradeRequest()).requestUpdate(this)
     }
 }

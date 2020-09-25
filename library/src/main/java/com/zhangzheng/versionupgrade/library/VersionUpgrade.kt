@@ -5,7 +5,7 @@ import com.zhangzheng.versionupgrade.library.impl.*
 import kotlinx.coroutines.*
 
 class VersionUpgrade(
-    var upgradeRequest: IUpgradeRequest = UpgradeRequest(),
+    var upgradeRequest: IUpgradeRequest,
     var upgradeView: IUpgradeView = UpgradeView(),
     var upgradeDown: IUpgradeDown = UpgradeDown(),
     var upgradeInstall: IUpgradeInstall = UpgradeInstall(),
@@ -25,7 +25,7 @@ class VersionUpgrade(
                 upgradeView.showDialog(
                     context,
                     upgradeRequest.isForceUpdate(),
-                    upgradeRequest.requestUpdateMessage()
+                    upgradeRequest.getUpdateMessage()
                 )
                 upgradeView.setUpdateListener {
                     uiScope.launch {
